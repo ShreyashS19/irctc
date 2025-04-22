@@ -6,18 +6,18 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
-app.use(cors({ origin: 'http://localhost:5173' })); // Allow frontend origin
+
+app.use(cors({ origin: 'http://localhost:5173' })); 
 app.use(express.json());
 
-// MongoDB Connection
+
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 }).then(() => console.log('MongoDB connected'))
   .catch(err => console.log('MongoDB connection error:', err));
 
-// Train Schema
+
 const trainSchema = new mongoose.Schema({
   name: String,
   from: String,
@@ -30,7 +30,7 @@ const trainSchema = new mongoose.Schema({
 
 const Train = mongoose.model('Train', trainSchema);
 
-// Ticket Schema
+
 const ticketSchema = new mongoose.Schema({
   id: String,
   train: String,
@@ -44,7 +44,7 @@ const ticketSchema = new mongoose.Schema({
 
 const Ticket = mongoose.model('Ticket', ticketSchema);
 
-// Seed initial train data
+
 const seedTrains = async () => {
   const trainsCount = await Train.countDocuments();
   if (trainsCount === 0) {
@@ -91,13 +91,12 @@ const seedTrains = async () => {
   } else {
     console.log('Train data already seeded, count:', trainsCount);
     const allTrains = await Train.find();
-    console.log('Current trains in DB:', allTrains); // Debug to verify data
+    // console.log('Current trains in DB:', allTrains); 
   }
 };
 seedTrains();
 
-// API Routes
-// Get all trains
+
 app.get('/api/trains', async (req, res) => {
   const trains = await Train.find();
   console.log('All trains fetched:', trains); // Debug log

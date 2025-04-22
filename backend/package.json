@@ -2,7 +2,7 @@
   "name": "irctc-backend",
   "version": "1.0.0",
   "main": "server.js",
-  "scripts": {
+  "scripts": {"dev": "nodemon index.js",
     "start": "node server.js"
   },
   "dependencies": {
@@ -10,5 +10,10 @@
     "mongoose": "^7.0.3",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3"
-  }
+  },
+  "devDependencies": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
